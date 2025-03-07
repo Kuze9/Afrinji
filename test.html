@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Afrin</title>
+  <style>
+    body {
+      background-color: #f3c6e8;
+      font-family: 'Arial', sans-serif;
+      color: #ffffff;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff3366;
+      margin-top: 20%;
+      animation: fadeIn 3s ease-out;
+    }
+
+    p {
+      font-size: 1.6em;
+      color: #444;
+      font-weight: bold;
+      margin-top: 20px;
+      animation: fadeInText 3s ease-out;
+    }
+
+    .heart {
+      font-size: 80px;
+      color: #ff3366;
+      animation: pulse 1.5s infinite;
+      margin-top: 30px;
+    }
+
+    .question {
+      font-size: 2em;
+      font-weight: bold;
+      color: #ff6699;
+      margin-top: 50px;
+      animation: fadeInText 2s ease-out;
+    }
+
+    .answer-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .answer-button {
+      padding: 20px 40px;
+      background-color: #ff6699;
+      color: #fff;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .answer-button:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Hey Afrin!</h1>
+  <p>I've got a question for you...</p>
+
+  <div class="heart">❤️</div>
+
+  <div class="question" id="first-question">Do you love me?</div>
+
+  <div class="answer-buttons">
+    <button class="answer-button" onclick="firstAnswer('Yes')">Yes, I do!</button>
+    <button class="answer-button" onclick="firstAnswer('No')">No, sorry!</button>
+  </div>
+
+  <script>
+    // Function to show the answer to the first question
+    function firstAnswer(answer) {
+      const firstQuestion = document.getElementById('first-question');
+      const buttonsDiv = document.querySelector('.answer-buttons');
+      
+      // Hide first question and buttons
+      firstQuestion.style.display = 'none';
+      buttonsDiv.style.display = 'none';
+      
+      // Display second question after first answer
+      setTimeout(() => {
+        const secondQuestion = document.createElement('div');
+        secondQuestion.classList.add('question');
+        secondQuestion.innerHTML = 'Wanna be mine, Afrin?';
+        document.body.appendChild(secondQuestion);
+
+        const secondButtonsDiv = document.createElement('div');
+        secondButtonsDiv.classList.add('answer-buttons');
+        
+        const yesButton = document.createElement('button');
+        yesButton.classList.add('answer-button');
+        yesButton.innerHTML = 'Yes, of course!';
+        yesButton.onclick = function() { showFinalAnswer('Yes') };
+        
+        const noButton = document.createElement('button');
+        noButton.classList.add('answer-button');
+        noButton.innerHTML = 'No, sorry!';
+        noButton.onclick = function() { showFinalAnswer('No') };
+
+        secondButtonsDiv.appendChild(yesButton);
+        secondButtonsDiv.appendChild(noButton);
+        
+        document.body.appendChild(secondButtonsDiv);
+      }, 1000);
+    }
+
+    // Function to show the final response based on second answer
+    function showFinalAnswer(answer) {
+      const secondQuestion = document.querySelector('.question');
+      const secondButtonsDiv = document.querySelector('.answer-buttons');
+      const heartDiv = document.querySelector('.heart');
+      
+      if (answer === 'Yes') {
+        secondQuestion.innerHTML = 'Yay! You\'re mine, Afrin! 💖';
+        secondQuestion.style.color = '#ff6699';
+        heartDiv.style.color = '#ff6699';
+        heartDiv.style.animation = 'none'; // Stop heart pulse
+      } else {
+        secondQuestion.innerHTML = 'Aww, that\'s okay! 💔';
+        secondQuestion.style.color = '#ff3366';
+        heartDiv.style.color = '#ff3366';
+        heartDiv.style.animation = 'none'; // Stop heart pulse
+      }
+      secondButtonsDiv.style.display = 'none'; // Hide second question buttons after click
+
+      // Pop-up with the final message
+      setTimeout(() => {
+        alert("Rayyan said I love you too, Afrin madam!");
+      }, 1000); // Display pop-up after a delay
+    }
+  </script>
+
+</body>
+</html>
